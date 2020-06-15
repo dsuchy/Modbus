@@ -30,7 +30,7 @@
             /// </summary>
             private void InitializeComponent()
             {
-            this.leftPanel = new System.Windows.Forms.Panel();
+            this.rightPanel = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -63,27 +63,27 @@
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.centerPanel = new System.Windows.Forms.Panel();
-            this.rightPanel = new System.Windows.Forms.Panel();
+            this.bottomPanel = new System.Windows.Forms.Panel();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.leftPanel.SuspendLayout();
+            this.rightPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.centerPanel.SuspendLayout();
-            this.rightPanel.SuspendLayout();
+            this.bottomPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // leftPanel
+            // rightPanel
             // 
-            this.leftPanel.Controls.Add(this.panel1);
-            this.leftPanel.Controls.Add(this.tableLayoutPanel1);
-            this.leftPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.leftPanel.Location = new System.Drawing.Point(534, 0);
-            this.leftPanel.Name = "leftPanel";
-            this.leftPanel.Size = new System.Drawing.Size(222, 417);
-            this.leftPanel.TabIndex = 1;
+            this.rightPanel.Controls.Add(this.panel1);
+            this.rightPanel.Controls.Add(this.tableLayoutPanel1);
+            this.rightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.rightPanel.Location = new System.Drawing.Point(534, 0);
+            this.rightPanel.Name = "rightPanel";
+            this.rightPanel.Size = new System.Drawing.Size(222, 417);
+            this.rightPanel.TabIndex = 1;
             // 
             // panel1
             // 
@@ -162,7 +162,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 31);
             this.label7.TabIndex = 6;
-            this.label7.Text = "Timeout znaku";
+            this.label7.Text = "Timeout znaku [ms]";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label5
@@ -205,7 +205,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(84, 31);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Timeout trans.";
+            this.label1.Text = "Timeout trans. [ms]";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label2
@@ -347,7 +347,7 @@
             this.label9.Dock = System.Windows.Forms.DockStyle.Top;
             this.label9.Location = new System.Drawing.Point(3, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(310, 13);
+            this.label9.Size = new System.Drawing.Size(524, 13);
             this.label9.TabIndex = 2;
             this.label9.Text = "Tekst do wysłania:";
             // 
@@ -355,9 +355,9 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.label10.Location = new System.Drawing.Point(3, 229);
+            this.label10.Location = new System.Drawing.Point(3, 174);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(310, 13);
+            this.label10.Size = new System.Drawing.Size(524, 13);
             this.label10.TabIndex = 3;
             this.label10.Text = "Tekst odebrany:";
             // 
@@ -368,17 +368,17 @@
             this.textBox1.Location = new System.Drawing.Point(3, 16);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(310, 165);
+            this.textBox1.Size = new System.Drawing.Size(524, 110);
             this.textBox1.TabIndex = 4;
             // 
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 245);
+            this.textBox2.Location = new System.Drawing.Point(3, 190);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(310, 165);
+            this.textBox2.Size = new System.Drawing.Size(524, 110);
             this.textBox2.TabIndex = 5;
             // 
             // tableLayoutPanel2
@@ -399,7 +399,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(316, 413);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(530, 303);
             this.tableLayoutPanel2.TabIndex = 6;
             // 
             // tableLayoutPanel3
@@ -414,12 +414,12 @@
             this.tableLayoutPanel3.Controls.Add(this.textBox5, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.button3, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 187);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 132);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(310, 39);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(524, 39);
             this.tableLayoutPanel3.TabIndex = 6;
             // 
             // label11
@@ -464,7 +464,7 @@
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.Location = new System.Drawing.Point(225, 3);
+            this.button3.Location = new System.Drawing.Point(439, 3);
             this.button3.Name = "button3";
             this.tableLayoutPanel3.SetRowSpan(this.button3, 2);
             this.button3.Size = new System.Drawing.Size(82, 33);
@@ -480,19 +480,19 @@
             this.centerPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.centerPanel.Location = new System.Drawing.Point(0, 0);
             this.centerPanel.Name = "centerPanel";
-            this.centerPanel.Size = new System.Drawing.Size(320, 417);
+            this.centerPanel.Size = new System.Drawing.Size(534, 307);
             this.centerPanel.TabIndex = 7;
             // 
-            // rightPanel
+            // bottomPanel
             // 
-            this.rightPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.rightPanel.Controls.Add(this.textBox3);
-            this.rightPanel.Controls.Add(this.label12);
-            this.rightPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.rightPanel.Location = new System.Drawing.Point(320, 0);
-            this.rightPanel.Name = "rightPanel";
-            this.rightPanel.Size = new System.Drawing.Size(110, 110);
-            this.rightPanel.TabIndex = 0;
+            this.bottomPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.bottomPanel.Controls.Add(this.textBox3);
+            this.bottomPanel.Controls.Add(this.label12);
+            this.bottomPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bottomPanel.Location = new System.Drawing.Point(0, 307);
+            this.bottomPanel.Name = "bottomPanel";
+            this.bottomPanel.Size = new System.Drawing.Size(534, 110);
+            this.bottomPanel.TabIndex = 0;
             // 
             // textBox3
             // 
@@ -501,7 +501,7 @@
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(210, 400);
+            this.textBox3.Size = new System.Drawing.Size(530, 93);
             this.textBox3.TabIndex = 5;
             // 
             // label12
@@ -509,7 +509,7 @@
             this.label12.Dock = System.Windows.Forms.DockStyle.Top;
             this.label12.Location = new System.Drawing.Point(0, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(210, 13);
+            this.label12.Size = new System.Drawing.Size(530, 13);
             this.label12.TabIndex = 2;
             this.label12.Text = "Historia ramek:";
             // 
@@ -519,13 +519,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 417);
             this.Controls.Add(this.centerPanel);
+            this.Controls.Add(this.bottomPanel);
             this.Controls.Add(this.rightPanel);
-            this.Controls.Add(this.leftPanel);
             this.Name = "Form1";
             this.Text = "Modbus";
             this.Load += new System.EventHandler(this.MainForm_Load);
-            this.leftPanel.ResumeLayout(false);
-            this.leftPanel.PerformLayout();
+            this.rightPanel.ResumeLayout(false);
+            this.rightPanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -533,15 +533,15 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.centerPanel.ResumeLayout(false);
-            this.rightPanel.ResumeLayout(false);
-            this.rightPanel.PerformLayout();
+            this.bottomPanel.ResumeLayout(false);
+            this.bottomPanel.PerformLayout();
             this.ResumeLayout(false);
 
             }
 
             #endregion
 
-            private System.Windows.Forms.Panel leftPanel;
+            private System.Windows.Forms.Panel rightPanel;
             private System.Windows.Forms.Panel panel1;
             private System.Windows.Forms.Button button2;
             private System.Windows.Forms.Button button1;
@@ -574,7 +574,7 @@
             private System.Windows.Forms.TextBox textBox5;
             private System.Windows.Forms.Button button3;
             private System.Windows.Forms.Panel centerPanel;
-            private System.Windows.Forms.Panel rightPanel;
+            private System.Windows.Forms.Panel bottomPanel;
             private System.Windows.Forms.TextBox textBox3;
             private System.Windows.Forms.Label label12;
         }

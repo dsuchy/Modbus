@@ -28,12 +28,10 @@ namespace Modbus
         private void MainForm_Load(object sender, EventArgs e)
         {
             comboBox1.DataSource = new List<int> { 150, 300, 600, 1200, 2400, 4800, 9600 /*, 14400, 19200, 38400, 56000, 57600, 115200*/ }.Select(it => new KeyValuePair<int, int>(it, it)).ToList();
-            //???
             comboBox2.DataSource = service.GetPortNames().Select(it => new KeyValuePair<string, string>(it, it)).ToList();
             comboBox3.DataSource = Enum.GetNames(typeof(Transmission)).Select(it => new KeyValuePair<Transmission, string>((Transmission)Enum.Parse(typeof(Transmission), it), it.Replace("T_", ""))).ToList();
-            comboBox4.DataSource = Enumerable.Range(1, 1000).Select(it => ((double)it) / 100).Select(it => new KeyValuePair<double, double>(it, it)).ToList();
-            comboBox5.DataSource = Enumerable.Range(1, 1000).Select(it => ((double)it) / 100).Select(it => new KeyValuePair<double, double>(it, it)).ToList();
-            //ważne - ta zmiana kolejności 7<->6 jest konieczna
+            comboBox4.DataSource = Enumerable.Range(1, 1000).Select(it => ((double)it)).Select(it => new KeyValuePair<double, double>(it, it)).ToList();
+            comboBox5.DataSource = Enumerable.Range(1, 1000).Select(it => ((double)it)).Select(it => new KeyValuePair<double, double>(it, it)).ToList();
             comboBox7.DataSource = Enumerable.Range(1, 247).Select(it => new KeyValuePair<int, int>(it, it)).ToList();
             comboBox6.DataSource = Enum.GetNames(typeof(Station)).Select(it => new KeyValuePair<Station, string>((Station)Enum.Parse(typeof(Station), it), it.Replace('_', '/'))).ToList();
             comboBox8.DataSource = Enumerable.Range(0, 6).Select(it => new KeyValuePair<int, int>(it, it)).ToList();
