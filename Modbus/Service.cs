@@ -77,41 +77,5 @@ namespace Modbus
             return null;
         }
 
-        public Frame Execute(Frame frame)
-        {
-            if (IsFrameValid(frame))
-            {
-                if (frame.Function == Enums.Function.SEND)
-                {
-                    return SendRequest(frame);
-                }
-                else if (frame.Function == Enums.Function.GET)
-                {
-                    return GetRequest(frame);
-                }
-            }
-
-            return null;
-        }
-
-        #region Private methods
-
-        private bool IsFrameValid(Frame frame)
-        {
-            return frame.Address == RequestFrame.Address &&
-                frame.Function == RequestFrame.Function;
-        }
-
-        private Frame SendRequest(Frame frame)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Frame GetRequest(Frame frame)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }
