@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Modbus
 {
@@ -49,69 +51,32 @@ namespace Modbus
             }
         }
 
-        public string ReceiveMessage()
+        public Tuple<string, bool> ReceiveMessage()
         {
             if (_serialPort.IsOpen)
             {
-                string message = _serialPort.ReadLine();
                 try
                 {
+                    string message = _serialPort.ReadLine();
+
                     if (!message.Contains("*&*"))
-                    {
-                        return $"[in] {message}";
+                    { 
+                            return new Tuple <string, bool> ($"[in] {message}", false);
                     }
                     else
                     {
                         message = message.Replace("*&*", "");
                         if (stations.Equals("SLAVE"))
-                            SendMessage(message);
-                        return $"[in] {message}";
+                            return new Tuple<string, bool>($"[in] {message}", true);
                     }
                 }
-                catch
+                catch (Exception e)
                 {
-                    return null;
                 }
             }
 
             return null;
         }
 
-        public Frame Execute(Frame frame)
-        {
-            if (IsFrameValid(frame))
-            {
-                if (frame.Function == Enums.Function.SEND)
-                {
-                    return SendRequest(frame);
-                }
-                else if (frame.Function == Enums.Function.GET)
-                {
-                    return GetRequest(frame);
-                }
-            }
-
-            return null;
-        }
-
-        #region Private methods
-
-        private bool IsFrameValid(Frame frame)
-        {
-            return frame.Address == RequestFrame.Address &&
-                frame.Function == RequestFrame.Function;
-        }
-
-        private Frame SendRequest(Frame frame)
-        {
-            throw new NotImplementedException();
-        }
-
-        private Frame GetRequest(Frame frame)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }
