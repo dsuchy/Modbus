@@ -17,6 +17,7 @@ namespace Modbus
     {
 
         private readonly Service service;
+        private string text = "";
 
         public Form1()
         {
@@ -41,20 +42,28 @@ namespace Modbus
                 Thread.CurrentThread.IsBackground = true;
                 while (true)
                 {
-                    var message = service.ReceiveMessage();
+                         // Running on the UI thread
+                        var message = service.ReceiveMessage();
 
-                    if (!string.IsNullOrEmpty(message))
+
+                    if (message!=null)
                     {
                         try
                         {
-                            this.textBox2.AppendText(Environment.NewLine);
-                            this.textBox2.AppendText(message);
+                            this.textBox2.Invoke((MethodInvoker)delegate {
+                                // Running on the UI thread
+                                this.textBox2.AppendText(Environment.NewLine);
+                                this.textBox2.AppendText(message.Item1);
+                            });
+                            if (message.Item2)
+                                service.SendMessage(text);
                         }
-                        catch
+                        catch (Exception ex)
                         {
-
+                            Console.WriteLine(ex.ToString());
                         }
                     }
+
                 }
             }).Start();
         }
@@ -148,11 +157,26 @@ namespace Modbus
 
                 this.textBox1.Text = string.Empty;
                 this.textBox1.Focus();
-                //wysyłamy rządanie odpowiedzi do slave'a
+                //wysyłamy rzondanie odpowiedzi do slave'a
             }
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            text = textBox1.Text;
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label9_Click(object sender, EventArgs e)
         {
 
         }

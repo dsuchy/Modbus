@@ -349,7 +349,8 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(524, 13);
             this.label9.TabIndex = 2;
-            this.label9.Text = "Tekst do wysłania:";
+            this.label9.Text = "Wyślij:";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label10
             // 
@@ -359,7 +360,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(524, 13);
             this.label10.TabIndex = 3;
-            this.label10.Text = "Tekst odebrany:";
+            this.label10.Text = "Odebrano:";
             // 
             // textBox1
             // 
@@ -370,6 +371,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(524, 110);
             this.textBox1.TabIndex = 4;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
@@ -380,6 +382,7 @@
             this.textBox2.ReadOnly = true;
             this.textBox2.Size = new System.Drawing.Size(524, 110);
             this.textBox2.TabIndex = 5;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // tableLayoutPanel2
             // 
