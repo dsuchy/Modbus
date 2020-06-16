@@ -51,7 +51,12 @@ namespace Modbus
             _serialPort.BaudRate = portParameters.Speed;
             _serialPort.PortName = portParameters.PortName;
             stations = station;
-
+            if (stations.Equals("MASTER"))
+            {
+                //Ogranicz czas wykonania transakcji
+                _serialPort.ReadTimeout =portParameters.readTimeout;
+                _serialPort.WriteTimeout =portParameters.readTimeout;
+            }
             try
             {
                 _serialPort.Open();
@@ -69,7 +74,7 @@ namespace Modbus
             _serialPort.Close();
         }
 
-        public void SendMessage(string address, string instruction, string message)
+        public string SendMessage(string address, string instruction, string message)
         {
             if (_serialPort.IsOpen)
             {
@@ -78,7 +83,10 @@ namespace Modbus
                 string msg = BuildFrame(Int16.Parse(address), Int16.Parse(instruction), message);
                 msg = ":" + msg + Convert.ToByte(CalculateLRC(msg)).ToString("x2") + "\r\n";
                 _serialPort.WriteLine(msg);
+                return msg;
             }
+
+            return "";
         }
 
         public Tuple<string, bool> ReceiveMessage()
@@ -89,6 +97,7 @@ namespace Modbus
                 {
                     // read the message and extract data from it
                     string message = _serialPort.ReadLine();
+                    string frame = message;
                     byte address = Convert.ToByte(message.Substring(1, 2), 16);
                     byte instruction = Convert.ToByte(message.Substring(3, 2), 16);
                     byte LRC = Convert.ToByte(message.Substring(message.Length - 5, 2), 16);
@@ -105,14 +114,14 @@ namespace Modbus
 
                     if (instruction == 1)
                     { 
-                            return new Tuple <string, bool> ($"[in] {message}", false);
+                            return new Tuple <string, bool> ($"[in]: {message} [hex frame]: {frame}", false);
                     }
-                    else if(instruction == 2)
+                    if(instruction == 2)
                     {
                         if (stations.Equals("SLAVE"))
-                            return new Tuple<string, bool>($"[in] {message}", true);
+                            return new Tuple<string, bool>($"[in]: {message} [hex frame]: {frame}", true);
                         if(stations.Equals("MASTER"))
-                            return new Tuple<string, bool>($"[in] {message}", false);
+                            return new Tuple<string, bool>($"[in]: {message} [hex frame]: {frame}", false);
                     }
                 }
                 catch (Exception e)

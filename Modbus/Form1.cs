@@ -26,13 +26,34 @@ namespace Modbus
             InitializeComponent();
         }
 
+        private List<int> timeLimit()
+        {
+            List < int > list = new List<int>();
+            for (int i = 0; i <= 1000; i += 10)
+            {
+                list.Add(i);
+            }
+
+            return list;
+        }
+
+        private List<int> timeoutTrans()
+        {
+            List<int> list = new List<int>();
+            for (int i = 0; i <= 10000; i += 100)
+            {
+                list.Add(i);
+            }
+
+            return list;
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             comboBox1.DataSource = new List<int> { 150, 300, 600, 1200, 2400, 4800, 9600 /*, 14400, 19200, 38400, 56000, 57600, 115200*/ }.Select(it => new KeyValuePair<int, int>(it, it)).ToList();
             comboBox2.DataSource = service.GetPortNames().Select(it => new KeyValuePair<string, string>(it, it)).ToList();
             comboBox3.DataSource = Enum.GetNames(typeof(Transmission)).Select(it => new KeyValuePair<Transmission, string>((Transmission)Enum.Parse(typeof(Transmission), it), it.Replace("T_", ""))).ToList();
-            comboBox4.DataSource = Enumerable.Range(1, 1000).Select(it => ((double)it)).Select(it => new KeyValuePair<double, double>(it, it)).ToList();
-            comboBox5.DataSource = Enumerable.Range(1, 1000).Select(it => ((double)it)).Select(it => new KeyValuePair<double, double>(it, it)).ToList();
+            comboBox4.DataSource = timeLimit().Select(it => new KeyValuePair<int, int>(it, it)).ToList();
+            comboBox5.DataSource = timeoutTrans().Select(it => new KeyValuePair<int, int>(it, it)).ToList();
             comboBox7.DataSource = Enumerable.Range(1, 247).Select(it => new KeyValuePair<int, int>(it, it)).ToList();
             comboBox6.DataSource = Enum.GetNames(typeof(Station)).Select(it => new KeyValuePair<Station, string>((Station)Enum.Parse(typeof(Station), it), it.Replace('_', '/'))).ToList();
             comboBox8.DataSource = Enumerable.Range(0, 6).Select(it => new KeyValuePair<int, int>(it, it)).ToList();
@@ -76,6 +97,7 @@ namespace Modbus
             {
                 Speed = Int32.Parse(this.comboBox1.Text),
                 PortName = this.comboBox2.Text,
+                readTimeout = Int32.Parse(this.comboBox5.Text)
             };
 
             service.SelfAddress = Int32.Parse(this.comboBox7.Text);
@@ -128,12 +150,18 @@ namespace Modbus
             {
                 case Station.MASTER:
                     comboBox7.Enabled = false;
+                    comboBox5.Enabled = true;
+                    textBox4.Enabled = true;
+                    textBox5.Enabled = true;
                     comboBox7.DropDownStyle = ComboBoxStyle.Simple;
                     comboBox7.Text = "0";
                     button3.Enabled = true;
                     break;
                 case Station.SLAVE:
                     comboBox7.Enabled = true;
+                    comboBox5.Enabled = false;
+                    textBox4.Enabled = false;
+                    textBox5.Enabled = false;
                     comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
                     comboBox7.SelectedIndex = 0;
                     button3.Enabled = false;
@@ -150,9 +178,10 @@ namespace Modbus
             if (address.Equals("0") && instruction.Equals("2"))
                 return;
 
-            service.SendMessage(address, instruction, message);
+            var hexFrame = service.SendMessage(address, instruction, message);
             this.textBox3.AppendText(Environment.NewLine);
-            this.textBox3.AppendText($"[out] {message}");
+            this.textBox3.AppendText($"[out]: {message}");
+            this.textBox3.AppendText($" [hex frame]: {hexFrame}");
             
             this.textBox1.Text = string.Empty;
             this.textBox1.Focus();
