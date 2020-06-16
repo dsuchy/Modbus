@@ -340,6 +340,7 @@
             this.comboBox7.Size = new System.Drawing.Size(127, 21);
             this.comboBox7.TabIndex = 14;
             this.comboBox7.ValueMember = "Key";
+            this.comboBox7.SelectedIndexChanged += new System.EventHandler(this.comboBox7_SelectedIndexChanged);
             // 
             // label9
             // 

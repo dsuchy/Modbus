@@ -78,6 +78,8 @@ namespace Modbus
                 PortName = this.comboBox2.Text,
             };
 
+            service.SelfAddress = Int32.Parse(this.comboBox7.Text);
+
             this.textBox2.Text = "Konfiguracja portu...";
 
             var isOpen = service.OpenPort(portParameters, comboBox6.Text);
@@ -186,6 +188,11 @@ namespace Modbus
         }
 
         private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

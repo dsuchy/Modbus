@@ -13,7 +13,10 @@ namespace Modbus
     {
         private readonly SerialPort _serialPort = new SerialPort();
         private string stations;
+        private Int32 selfAddress;
         public Frame RequestFrame { get; set; }
+
+        public Int32 SelfAddress { get => selfAddress; set => selfAddress = value; }
 
         private char CalculateLRC(string message)
         {
@@ -94,7 +97,11 @@ namespace Modbus
                     {
                         msg += Convert.ToChar(Convert.ToByte(message.Substring(i, 2), 16)).ToString();
                     }
-                    message = msg;
+
+                    if (Convert.ToInt32(address) == selfAddress || Convert.ToInt32(address) == 0)
+                        message = msg;
+                    else
+                        return null;
 
                     if (!message.Contains("*&*"))
                     { 
