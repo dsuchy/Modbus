@@ -14,5 +14,6 @@ namespace Modbus
 
         public int TransmissionType { get; set; }
 
+        public int readTimeout { get; set; }
     }
 }

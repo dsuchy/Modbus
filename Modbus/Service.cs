@@ -51,7 +51,12 @@ namespace Modbus
             _serialPort.BaudRate = portParameters.Speed;
             _serialPort.PortName = portParameters.PortName;
             stations = station;
-
+            if (stations.Equals("MASTER"))
+            {
+                //Ogranicz czas wykonania transakcji
+                _serialPort.ReadTimeout =portParameters.readTimeout;
+                _serialPort.WriteTimeout =portParameters.readTimeout;
+            }
             try
             {
                 _serialPort.Open();

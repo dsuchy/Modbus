@@ -97,6 +97,7 @@ namespace Modbus
             {
                 Speed = Int32.Parse(this.comboBox1.Text),
                 PortName = this.comboBox2.Text,
+                readTimeout = Int32.Parse(this.comboBox5.Text)
             };
 
             service.SelfAddress = Int32.Parse(this.comboBox7.Text);
