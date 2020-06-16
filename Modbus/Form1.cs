@@ -147,6 +147,9 @@ namespace Modbus
             var address = this.textBox4.Text;
             var instruction = this.textBox5.Text;
 
+            if (address.Equals("0") && instruction.Equals("2"))
+                return;
+
             service.SendMessage(address, instruction, message);
             this.textBox3.AppendText(Environment.NewLine);
             this.textBox3.AppendText($"[out] {message}");

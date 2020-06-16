@@ -111,6 +111,8 @@ namespace Modbus
                     {
                         if (stations.Equals("SLAVE"))
                             return new Tuple<string, bool>($"[in] {message}", true);
+                        if(stations.Equals("MASTER"))
+                            return new Tuple<string, bool>($"[in] {message}", false);
                     }
                 }
                 catch (Exception e)
