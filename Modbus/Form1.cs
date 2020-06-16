@@ -55,8 +55,10 @@ namespace Modbus
                                 this.textBox2.AppendText(Environment.NewLine);
                                 this.textBox2.AppendText(message.Item1);
                             });
+                            var address = this.textBox4.Text;
+                            var instruction = this.textBox5.Text;
                             if (message.Item2)
-                                service.SendMessage(text);
+                                service.SendMessage(address, instruction, text);
                         }
                         catch (Exception ex)
                         {
@@ -138,10 +140,12 @@ namespace Modbus
         private void button3_Click(object sender, EventArgs e)
         {
             var message = this.textBox1.Text;
+            var address = this.textBox4.Text;
+            var instruction = this.textBox5.Text;
 
             if (textBox5.Text == "1")
             {
-                service.SendMessage(message);
+                service.SendMessage(address, instruction, message);
                 this.textBox3.AppendText(Environment.NewLine);
                 this.textBox3.AppendText($"[out] {message}");
 
@@ -151,7 +155,7 @@ namespace Modbus
             }
             else if (textBox5.Text == "2")
             {
-                service.SendMessage("*&*" + message);
+                service.SendMessage(address, instruction, "*&*" + message);
                 this.textBox3.AppendText(Environment.NewLine);
                 this.textBox3.AppendText($"[out] {message}");
 
@@ -177,6 +181,11 @@ namespace Modbus
         }
 
         private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
         {
 
         }
