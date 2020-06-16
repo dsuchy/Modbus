@@ -103,13 +103,12 @@ namespace Modbus
                     else
                         return null;
 
-                    if (!message.Contains("*&*"))
+                    if (instruction == 1)
                     { 
                             return new Tuple <string, bool> ($"[in] {message}", false);
                     }
-                    else
+                    else if(instruction == 2)
                     {
-                        message = message.Replace("*&*", "");
                         if (stations.Equals("SLAVE"))
                             return new Tuple<string, bool>($"[in] {message}", true);
                     }

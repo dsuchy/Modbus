@@ -58,7 +58,7 @@ namespace Modbus
                             var address = this.textBox4.Text;
                             var instruction = this.textBox5.Text;
                             if (message.Item2)
-                                service.SendMessage(address, instruction, text);
+                                service.SendMessage("0", "2", this.textBox1.Text);
                         }
                         catch (Exception ex)
                         {
@@ -130,11 +130,13 @@ namespace Modbus
                     comboBox7.Enabled = false;
                     comboBox7.DropDownStyle = ComboBoxStyle.Simple;
                     comboBox7.Text = "0";
+                    button3.Enabled = true;
                     break;
                 case Station.SLAVE:
                     comboBox7.Enabled = true;
                     comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
                     comboBox7.SelectedIndex = 0;
+                    button3.Enabled = false;
                     break;
             }
         }
@@ -145,26 +147,13 @@ namespace Modbus
             var address = this.textBox4.Text;
             var instruction = this.textBox5.Text;
 
-            if (textBox5.Text == "1")
-            {
-                service.SendMessage(address, instruction, message);
-                this.textBox3.AppendText(Environment.NewLine);
-                this.textBox3.AppendText($"[out] {message}");
+            service.SendMessage(address, instruction, message);
+            this.textBox3.AppendText(Environment.NewLine);
+            this.textBox3.AppendText($"[out] {message}");
 
-                this.textBox1.Text = string.Empty;
-                this.textBox1.Focus();
-                //wysyłamy wiadomość do slave'a
-            }
-            else if (textBox5.Text == "2")
-            {
-                service.SendMessage(address, instruction, "*&*" + message);
-                this.textBox3.AppendText(Environment.NewLine);
-                this.textBox3.AppendText($"[out] {message}");
-
-                this.textBox1.Text = string.Empty;
-                this.textBox1.Focus();
-                //wysyłamy rzondanie odpowiedzi do slave'a
-            }
+            this.textBox1.Text = string.Empty;
+            this.textBox1.Focus();
+            //wysyłamy wiadomość do slave'a
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
