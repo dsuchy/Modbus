@@ -150,9 +150,10 @@ namespace Modbus
             if (address.Equals("0") && instruction.Equals("2"))
                 return;
 
-            service.SendMessage(address, instruction, message);
+            var hexFrame = service.SendMessage(address, instruction, message);
             this.textBox3.AppendText(Environment.NewLine);
-            this.textBox3.AppendText($"[out] {message}");
+            this.textBox3.AppendText($"[out]: {message}");
+            this.textBox3.AppendText($" [hex frame]: {hexFrame}");
             
             this.textBox1.Text = string.Empty;
             this.textBox1.Focus();
