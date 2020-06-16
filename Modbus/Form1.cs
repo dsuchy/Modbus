@@ -153,7 +153,7 @@ namespace Modbus
             service.SendMessage(address, instruction, message);
             this.textBox3.AppendText(Environment.NewLine);
             this.textBox3.AppendText($"[out] {message}");
-
+            
             this.textBox1.Text = string.Empty;
             this.textBox1.Focus();
             //wysyłamy wiadomość do slave'a
