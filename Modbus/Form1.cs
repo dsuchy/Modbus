@@ -55,8 +55,10 @@ namespace Modbus
                                 this.textBox2.AppendText(Environment.NewLine);
                                 this.textBox2.AppendText(message.Item1);
                             });
+                            var address = this.textBox4.Text;
+                            var instruction = this.textBox5.Text;
                             if (message.Item2)
-                                service.SendMessage(text);
+                                service.SendMessage("0", "2", this.textBox1.Text);
                         }
                         catch (Exception ex)
                         {
@@ -75,6 +77,8 @@ namespace Modbus
                 Speed = Int32.Parse(this.comboBox1.Text),
                 PortName = this.comboBox2.Text,
             };
+
+            service.SelfAddress = Int32.Parse(this.comboBox7.Text);
 
             this.textBox2.Text = "Konfiguracja portu...";
 
@@ -126,11 +130,13 @@ namespace Modbus
                     comboBox7.Enabled = false;
                     comboBox7.DropDownStyle = ComboBoxStyle.Simple;
                     comboBox7.Text = "0";
+                    button3.Enabled = true;
                     break;
                 case Station.SLAVE:
                     comboBox7.Enabled = true;
                     comboBox7.DropDownStyle = ComboBoxStyle.DropDownList;
                     comboBox7.SelectedIndex = 0;
+                    button3.Enabled = false;
                     break;
             }
         }
@@ -138,27 +144,16 @@ namespace Modbus
         private void button3_Click(object sender, EventArgs e)
         {
             var message = this.textBox1.Text;
+            var address = this.textBox4.Text;
+            var instruction = this.textBox5.Text;
 
-            if (textBox5.Text == "1")
-            {
-                service.SendMessage(message);
-                this.textBox3.AppendText(Environment.NewLine);
-                this.textBox3.AppendText($"[out] {message}");
+            service.SendMessage(address, instruction, message);
+            this.textBox3.AppendText(Environment.NewLine);
+            this.textBox3.AppendText($"[out] {message}");
 
-                this.textBox1.Text = string.Empty;
-                this.textBox1.Focus();
-                //wysyłamy wiadomość do slave'a
-            }
-            else if (textBox5.Text == "2")
-            {
-                service.SendMessage("*&*" + message);
-                this.textBox3.AppendText(Environment.NewLine);
-                this.textBox3.AppendText($"[out] {message}");
-
-                this.textBox1.Text = string.Empty;
-                this.textBox1.Focus();
-                //wysyłamy rzondanie odpowiedzi do slave'a
-            }
+            this.textBox1.Text = string.Empty;
+            this.textBox1.Focus();
+            //wysyłamy wiadomość do slave'a
         }
 
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -177,6 +172,16 @@ namespace Modbus
         }
 
         private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
